@@ -1,0 +1,55 @@
+{
+  "generator-robonkey": {
+    "environmentOption": "static",
+    "gulpDirOption": true,
+    "gulpCmdOption": false,
+    "gulpTypeOption": false,
+    "projectUrl": "mynewawesomeapp.localhost",
+    "projectName": "project",
+    "projectNameJson": "project",
+    "projectDescription": "My new awesome app",
+    "projectVersion": "0.0.0",
+    "projectAuthor": "Cesar Jeanroy",
+    "authorEmail": "cesar.jeanroy@gmail.com",
+    "projectLicense": "MIT",
+    "mainDir": "website",
+    "assetsDir": "assets",
+    "cssDir": "css",
+    "imgDir": "img",
+    "jsDir": "js",
+    "libDir": "lib",
+    "fontDir": "fonts",
+    "templateOption": "html",
+    "baseStyleOption": "none",
+    "preproOption": "scss",
+    "mixinOption": "default",
+    "mqOption": "default",
+    "gridOption": "none",
+    "postcssOption": [
+      "autoprefixer"
+    ],
+    "javascriptOption": "coffee",
+    "scriptsOption": [
+      "jquery",
+      "backbone"
+    ],
+    "iconsType": "none",
+    "customIconfontOption": false,
+    "svgiconsOption": false,
+    "rootFolder": "..",
+    "nodeModules": "../../gulp/node_modules/"
+  },
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "Cs464",
+    "coffee": true,
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "sassBootstrap": true,
+    "includeRequireJS": false
+  },
+  "generator-mocha": {
+    "ui": "bdd",
+    "rjs": false
+  }
+}
