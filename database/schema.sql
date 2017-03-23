@@ -19,24 +19,24 @@ CREATE TABLE IF NOT EXISTS categories(
 
 CREATE TABLE IF NOT EXISTS products(
 	product_id int NOT NULL auto_increment,
-	company_id int NOT NULL,
-	name varchar(30) NOT NULL,
+	company_id int,
+	name varchar(3000) NOT NULL,
 	picture varchar(500) NOT NULL,
-	description varchar(100) NOT NULL,
+	description varchar(5000) NOT NULL,
 	price decimal(10, 2) unsigned NOT NULL,
 	quantity_in_stock int NOT NULL DEFAULT 0,
 	category_name varchar(100),
 	PRIMARY KEY (product_id),
-	FOREIGN KEY (company_id) REFERENCES companies(company_id),
-	FOREIGN KEY (category_name) REFERENCES categories(category_name)
+	FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (category_name) REFERENCES categories(category_name) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS items(
 	item_id int NOT NULL auto_increment,
 	quantity int NOT NULL DEFAULT 1,
-	product_id int NOT NULL,
+	product_id int,
 	PRIMARY KEY (item_id),
-	FOREIGN KEY (product_id) REFERENCES products(product_id)
+	FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS users(
@@ -49,43 +49,8 @@ CREATE TABLE IF NOT EXISTS users(
 	created_at datetime NOT NULL,
 	sex char(1) NOT NULL,
 	password char(32) NOT NULL,
-	default_address_id int NOT NULL,
+	default_address_id int,
 	PRIMARY KEY (email)
-);
-
-CREATE TABLE IF NOT EXISTS addresses( 
-	address_id int NOT NULL auto_increment,
-	email varchar(100) NOT NULL,
-	street varchar(100) NOT NULL,
-	apartment varchar(10) NOT NULL,
-	country varchar(50) NOT NULL,
-	zip int NOT NULL,
-	PRIMARY KEY (address_id),
-	FOREIGN KEY (email) REFERENCES users(email)
-);
-
-ALTER TABLE users ADD FOREIGN KEY (default_address_id) REFERENCES addresses(address_id);
-
-CREATE TABLE IF NOT EXISTS deliveries(
-	delivery_id int NOT NULL auto_increment,
-	delivered_at datetime,
-	shipped_at datetime,
-	type varchar(100) DEFAULT '3 days',
-	address_id int NOT NULL,
-	PRIMARY KEY (delivery_id),
-	FOREIGN KEY (address_id) REFERENCES addresses(address_id)
-);
-
-CREATE TABLE IF NOT EXISTS orders(
-	order_id int NOT NULL auto_increment,
-	status varchar(30) NOT NULL DEFAULT 'in process',
-	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	delivery_id int NOT NULL,
-	item_id int NOT NULL,
-	email varchar(100),
-	PRIMARY KEY (order_id),
-	FOREIGN KEY (item_id) REFERENCES items(item_id),
-	FOREIGN KEY (email) REFERENCES users(email)
 );
 
 CREATE TABLE IF NOT EXISTS demographics(
@@ -93,6 +58,41 @@ CREATE TABLE IF NOT EXISTS demographics(
 	country varchar(50) NOT NULL,
 	state varchar(30) NOT NULL,
 	city varchar(50) NOT NULL,
-	PRIMARY KEY (zip)
-);																				
+	PRIMARY KEY (zip, country)
+);
 
+CREATE TABLE IF NOT EXISTS addresses( 
+	address_id int NOT NULL auto_increment,
+	email varchar(100),
+	street varchar(100) NOT NULL,
+	apartment varchar(10) NOT NULL,
+	country varchar(50),
+	zip varchar(20),
+	PRIMARY KEY (address_id),
+	FOREIGN KEY (email) REFERENCES users(email) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (zip, country) REFERENCES demographics(zip, country) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+ALTER TABLE users ADD FOREIGN KEY (default_address_id) REFERENCES addresses(address_id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+CREATE TABLE IF NOT EXISTS deliveries(
+	delivery_id int NOT NULL auto_increment,
+	delivered_at datetime,
+	shipped_at datetime,
+	type varchar(100) DEFAULT '3 days',
+	address_id int,
+	PRIMARY KEY (delivery_id),
+	FOREIGN KEY (address_id) REFERENCES addresses(address_id) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS orders(
+	order_id int NOT NULL auto_increment,
+	status varchar(30) NOT NULL DEFAULT 'in process',
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	delivery_id int NOT NULL,
+	item_id int,
+	email varchar(100),
+	PRIMARY KEY (order_id),
+	FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE SET NULL ON UPDATE CASCADE,
+	FOREIGN KEY (email) REFERENCES users(email) ON DELETE SET NULL ON UPDATE CASCADE
+);
