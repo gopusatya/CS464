@@ -1,0 +1,11 @@
+USE cs464;
+
+DROP TABLE IF EXISTS `companies`;
+DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `addresses`;
+DROP TABLE IF EXISTS `items`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `deliveries`;
+DROP TABLE IF EXISTS `demographics`;
