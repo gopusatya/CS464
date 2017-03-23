@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS cs464;
-USE cs464;
+CREATE DATABASE IF NOT EXISTS cs_464;
+USE cs_464;
 
 CREATE TABLE IF NOT EXISTS companies(
 	company_id int NOT NULL auto_increment,	
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS items(
 
 CREATE TABLE IF NOT EXISTS users(
 	email varchar(100) NOT NULL,
-	phone_number char(10) NOT NULL,
+	phone_number varchar(17) NOT NULL,
 	lastname varchar(20) NOT NULL,
 	firstname varchar(20) NOT NULL,
 	date_birth date NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS addresses(
 	address_id int NOT NULL auto_increment,
 	email varchar(100),
 	street varchar(100) NOT NULL,
-	apartment varchar(10) NOT NULL,
+	apartment varchar(10),
 	country varchar(50),
 	zip varchar(20),
 	PRIMARY KEY (address_id),
