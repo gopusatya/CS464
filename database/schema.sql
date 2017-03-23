@@ -1,68 +1,101 @@
-create table Companies(comapanyID int not null auto_increment primary key,
-						companyName varchar(20) not null,
-						hqAddress varchar(100) not null,
-						dateOfCreation Date not null,
-						country varchar(20) not null);
+CREATE DATABASE IF NOT EXISTS cs464;
+
+CREATE TABLE IF NOT EXISTS companies(
+	company_id int NOT NULL auto_increment,	
+	company_name varchar(50) NOT NULL,
+	hq_address varchar(250) NOT NULL,
+	date_creation date NOT NULL,
+	country varchar(50) NOT NULL,
+	PRIMARY KEY (company_id)
+);
+
+CREATE TABLE IF NOT EXISTS categories(
+	category_name varchar(100) NOT NULL,
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleted_at datetime,
+	PRIMARY KEY (category_name)
+);
+
+CREATE TABLE IF NOT EXISTS products(
+	product_id int NOT NULL auto_increment,
+	company_id int NOT NULL,
+	name varchar(30) NOT NULL,
+	picture varchar(500) NOT NULL,
+	description varchar(100) NOT NULL,
+	price decimal(10, 2) unsigned NOT NULL,
+	quantity_in_stock int NOT NULL DEFAULT 0,
+	category_name varchar(100),
+	PRIMARY KEY (product_id),
+	FOREIGN KEY (company_id), REFERENCES companies(company_id),
+	FOREIGN KEY (category_name), REFERENCES categories(category_name)
+);
+
+CREATE TABLE IF NOT EXISTS items(
+	item_id int NOT NULL auto_increment,
+	quantity int NOT NULL DEFAULT 1,
+	product_id int NOT NULL,
+	PRIMARY KEY (item_id),
+	FOREIGN KEY (product_id), REFERENCES products(product_id)
+);
 
 
-create table Products(productID int not null auto_increment primary key,
-						companyID int not null,
-						productName varchar(20) not null,
-						picture varchar(100) not null,
-						description varchar(100) not null,
-						price decimal(6,2) unsigned not null,
-						quantityInStock int not null,
-						categoryName varchar(20) not null);
+CREATE TABLE IF NOT EXISTS users(
+	email varchar(100) NOT NULL,
+	phone_number char(10) NOT NULL,
+	lastname varchar(20) NOT NULL,
+	firstname varchar(20) NOT NULL,
+	date_birth date NOT NULL,
+	type varchar(5) NOT NULL DEFAULT 'client',
+	created_at datetime NOT NULL,
+	sex char(1) NOT NULL,
+	password char(32) NOT NULL,
+	default_address_id int NOT NULL,
+	PRIMARY KEY (email),
+	FOREIGN KEY (default_address_id), REFERENCES addresses(default_address_id)
+);
 
 
-create table Categories(categoryName varchar(20) not null primary key,
-						createdAt datetime not null,
-						deletedAt datetime);
+CREATE TABLE IF NOT EXISTS addresses( 
+	address_id int NOT NULL auto_increment,
+	email varchar(100) NOT NULL,
+	street varchar(100) NOT NULL,
+	apartment varchar(10) NOT NULL,
+	country varchar(50) NOT NULL,
+	zip int NOT NULL,
+	PRIMARY KEY (address_id),
+	FOREIGN KEY (email), REFERENCES users(email)
+);
 
 
-create table Items(itemID int not null auto_increment primary key,
-					quantity int not null,
-					producID int not null);
+CREATE TABLE IF NOT EXISTS deliveries(
+	delivery_id int NOT NULL auto_increment,
+	delivered_at datetime,
+	shipped_at datetime,
+	type varchar(100) DEFAULT '3 days',
+	address_id int NOT NULL,
+	PRIMARY KEY (delivery_id),
+	FOREIGN KEY (address_id), REFERENCES addresses(address_id)
+);
 
 
-create table Orders(orderID int not null auto_increment primary key,
-					status varchar(20) not null,
-					createdAt datetime not null,
-					deliveryID int not null,
-					itemID int not null,
-					email varchar(30));
+CREATE TABLE IF NOT EXISTS orders(
+	order_id int NOT NULL auto_increment,
+	status varchar(30) NOT NULL DEFAULT 'in process',
+	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	delivery_id int NOT NULL,
+	item_id int NOT NULL,
+	email varchar(100),
+	PRIMARY KEY (order_id),
+	FOREIGN KEY (item_id), REFERENCES items(item_id),
+	FOREIGN KEY (email), REFERENCES users(email)
+);
 
 
-create table Deliveries(deliveryID int not null auto_increment primary	
-						key,
-						deliveredAt datetime not null,
-						shippedAt datetime not null,
-						type varchar(20) not null,
-						addressID int not null);
-
-
-create table Users(email varchar(30) not null primary key,
-					phoneNumber char(10) not null,
-					dateOfbirth date not null,
-					type varchar(5) not null,
-					createdAt datetime not null,
-					sex char(1) not null,
-					lastname varchar(20) not null,
-					firstname varchar(20) not null,
-					password varchar(10) not null,
-					defaultAddressID int not null);
-
-
-create table Addresses( AddressID int not null auto_increment primary key,
-						userEmail varchar(30) not null,
-						street varchar(50) not null,
-						apartment varchar(20) not null,
-						country varchar(15) not null,
-						zip int not null);
-
-
-create table Demographics(zip int not null primary key,
-							country varchar(15) not null,
-							state varchar(20) not null,
-							city varchar(20) not null);	 																					
+CREATE TABLE IF NOT EXISTS demographics(
+	zip varchar(20) NOT NULL,
+	country varchar(50) NOT NULL,
+	state varchar(30) NOT NULL,
+	city varchar(50) NOT NULL,
+	PRIMARY KEY (zip),
+);	 																					
 
