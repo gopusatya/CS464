@@ -5,6 +5,8 @@
 * - Categories: 10 rows
 * - Products: 1000 rows
 * - Users: 1000 rows
+* - Demographics: 12 rows
+* - Addresses: 100 rows
 */
 /*
 insert into companies (company_name, hq_address, date_creation, country) values ('Kwilith', '0121 Hoard Circle', '1948-08-20', 'Sweden');
@@ -2019,7 +2021,6 @@ insert into products (company_id, name, picture, description, price, quantity_in
 insert into products (company_id, name, picture, description, price, quantity_in_stock, category_name) values (283, 'Salicylic Acid', 'http://dummyimage.com/169x226.bmp/cc0000/ffffff', 'Proctotomy', 511825.89, 40, 'Movies');
 insert into products (company_id, name, picture, description, price, quantity_in_stock, category_name) values (893, 'BENZALKONIUM CHLORIDE, BACITRACIN ZINC, NEOMYCIN SULFATE, POLYMYXIN B SULFATE, WATER, ISOPROPYL ALCOHOL, BENZOCAINE, ALCOHOL, ASPIRIN,', 'http://dummyimage.com/142x143.jpg/dddddd/000000', 'Other operations on pancreas', 550074.95, 90, 'Jewelery');
 insert into products (company_id, name, picture, description, price, quantity_in_stock, category_name) values (241, 'Clonidine', 'http://dummyimage.com/219x201.bmp/5fa2dd/ffffff', 'Other cranial osteoplasty', 460671.43, 20, 'Sports');
-*/
 
 insert into users (email, phone_number, lastname, firstname, date_birth, created_at, sex, password) values ('dbennett0@dedecms.com', '232-(844)170-2619', 'Bennett', 'Douglas', '1996-05-08 23:50:10', '2014-10-16 12:25:14', 'm', '1bee92f9ee0b357fa4d84c89bac036f8');
 insert into users (email, phone_number, lastname, firstname, date_birth, created_at, sex, password) values ('jrobinson1@omniture.com', '1-(650)201-0938', 'Robinson', 'Jane', '1979-07-15 10:53:00', '2016-03-26 18:01:01', 'f', 'dbafc7ba996504a3f32c66ce7482290e');
@@ -3021,4 +3022,16 @@ insert into users (email, phone_number, lastname, firstname, date_birth, created
 insert into users (email, phone_number, lastname, firstname, date_birth, created_at, sex, password) values ('kmoralesrp@blogs.com', '970-(941)953-8418', 'Morales', 'Kathryn', '1995-06-02 21:16:29', '2015-03-01 00:44:31', 'm', '769e247b42f4ded9c6d59e8d0cff6aeb');
 insert into users (email, phone_number, lastname, firstname, date_birth, created_at, sex, password) values ('hknightrq@apache.org', '970-(544)910-1508', 'Knight', 'Henry', '1968-12-16 23:20:09', '2016-11-16 08:13:26', 'f', 'a88b80ce2297c473646cab6d39b313b9');
 insert into users (email, phone_number, lastname, firstname, date_birth, created_at, sex, password) values ('cstanleyrr@imgur.com', '963-(613)412-1247', 'Stanley', 'Christopher', '1948-09-12 07:25:55', '2013-11-15 21:13:07', 'm', '0d64a1ab7c7cdce23a52e51491802e04');
-
+*/
+insert into demographics (zip, country, state, city) values (11510, 'usa', 'Ohio', 'Mansfield');
+insert into demographics (zip, country, state, city) values (96815, 'usa', 'Alabama', 'Birmingham');
+insert into demographics (zip, country, state, city) values (60185, 'usa', 'California', 'Sacramento');
+insert into demographics (zip, country, state, city) values (56001, 'usa', 'Arizona', 'Tucson');
+insert into demographics (zip, country, state, city) values (13090, 'usa', 'Georgia', 'Savannah');
+insert into demographics (zip, country, state, city) values (98837, 'usa', 'Georgia', 'Atlanta');
+insert into demographics (zip, country, state, city) values (11511, 'usa', 'Connecticut', 'Stamford');
+insert into demographics (zip, country, state, city) values (96816, 'usa', 'Idaho', 'Boise');
+insert into demographics (zip, country, state, city) values (60181, 'usa', 'Texas', 'Amarillo');
+insert into demographics (zip, country, state, city) values (56002, 'usa', 'California', 'Los Angeles');
+insert into demographics (zip, country, state, city) values (13091, 'usa', 'Florida', 'Fort Myers');
+insert into demographics (zip, country, state, city) values (98838, 'usa', 'Illinois', 'Springfield');
