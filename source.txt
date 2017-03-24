@@ -1,0 +1,7 @@
+mysql> source source.sql;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add varchar(20), id int not null auto_increment primary key)' at line 1
+mysql> source source.sql;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add varchar(20), id int not null auto_increment primary key)' at line 1
+mysql> source source.sql;
+Query OK, 0 rows affected (0.01 sec)
+
