@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS am01780;
-USE am01780;
+CREATE DATABASE IF NOT EXISTS cs_464;
+USE cs_464;
 
 CREATE TABLE IF NOT EXISTS companies(
 	company_id int NOT NULL auto_increment,	
@@ -12,8 +12,8 @@ CREATE TABLE IF NOT EXISTS companies(
 
 CREATE TABLE IF NOT EXISTS categories(
 	category_name varchar(100) NOT NULL,
-	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	deleted_at datetime,
+	created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	deleted_at timestamp,
 	PRIMARY KEY (category_name)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS users(
 	firstname varchar(20) NOT NULL,
 	date_birth date NOT NULL,
 	type varchar(20) NOT NULL DEFAULT 'client',
-	created_at datetime NOT NULL,
+	created_at timestamp NOT NULL,
 	sex char(1) NOT NULL,
 	password char(32) NOT NULL,
 	default_address_id int,
@@ -77,8 +77,8 @@ ALTER TABLE users ADD FOREIGN KEY (default_address_id) REFERENCES addresses(addr
 
 CREATE TABLE IF NOT EXISTS deliveries(
 	delivery_id int NOT NULL auto_increment,
-	delivered_at datetime,
-	shipped_at datetime,
+	delivered_at timestamp,
+	shipped_at timestamp,
 	type varchar(100) DEFAULT '3 days',
 	address_id int,
 	PRIMARY KEY (delivery_id),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS deliveries(
 CREATE TABLE IF NOT EXISTS orders(
 	order_id int NOT NULL auto_increment,
 	status varchar(30) NOT NULL DEFAULT 'in process',
-	created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	delivery_id int NOT NULL,
 	item_id int,
 	email varchar(100),
